@@ -39,3 +39,9 @@ jobs:
         with:
           name: app-release.apk
           path: ${{ github.workspace }}/app/build/outputs/apk/release
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
