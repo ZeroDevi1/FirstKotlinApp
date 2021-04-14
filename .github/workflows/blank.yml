@@ -33,7 +33,7 @@ jobs:
       - name: "Build Android project"
         uses: vgaidarji/android-github-actions-build@v1.0.1
         with:
-          args: "./gradlew assemble"
+          args: "chmod +x gradlew && ./gradlew assemble"
 
       #step：上传apk 到action，在右上角查看
       # 官方文档 https://help.github.com/cn/actions/automating-your-workflow-with-github-actions/persisting-workflow-data-using-artifacts#uploading-build-and-test-artifacts
