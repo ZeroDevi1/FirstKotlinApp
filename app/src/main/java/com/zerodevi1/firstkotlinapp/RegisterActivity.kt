@@ -3,6 +3,8 @@ package com.zerodevi1.firstkotlinapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         setSupportActionBar(findViewById(R.id.toolbar))
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // 响应Cancel按钮的单击事件
         buttonCancel.setOnClickListener {
             // 关闭自己
@@ -34,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val checkRadioId = radioGroup.checkedRadioButtonId
             // 如果选中的ID等于男则将sex改为true
-            if(checkRadioId == R.id.radioMale){
+            if (checkRadioId == R.id.radioMale) {
                 sex = true
             }
 
@@ -43,15 +45,23 @@ class RegisterActivity : AppCompatActivity() {
 
             // 创建 Intent 对象,保存要返回的数据,这里只需要返回 name 和 password
             val intent = Intent()
-            intent.putExtra(MainActivity.KEY_NAME,name)
-            intent.putExtra(MainActivity.KEY_PASSWORD,password)
+            intent.putExtra(MainActivity.Companion.KEY_NAME, name)
+            intent.putExtra(MainActivity.Companion.KEY_PASSWORD, password)
 
             // 设置要返回的数据,第一个参数是SDK中定义的常量,表示本Activity正确执行
             // 第二个参数就是要返回的数据的Intent对象
-            setResult(Activity.RESULT_OK,intent)
+            setResult(Activity.RESULT_OK, intent)
 
             // 关闭当前Activity
             finish()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
