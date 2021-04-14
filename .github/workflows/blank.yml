@@ -6,10 +6,12 @@ on:
   push:
     # 在指定的远程分支上，发生推送
     branches:
-      - dev
+      - main
     # 指定文件发生修改
-    paths:
-      - 'config.gradle'
+  pull_request:
+    # 在指定的远程分支上，发生推送
+    branches:
+      - main
 jobs:
 # 多个job，如果有多个，每个以“-”开头
   first-job:
