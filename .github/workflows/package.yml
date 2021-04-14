@@ -33,15 +33,14 @@ jobs:
           echo "开始进行release构建"
           chmod +x gradlew
           ./gradlew app:assembleRelease
+      - name: Release apk
+        uses: ncipollo/release-action@v1.5.0
+        with:
+          artifacts: ${{ github.workspace }}/app/build/outputs/apk/release/app-release.apk
+          token: ${{ secrets.GIT_RElEASE_TOKEN }}
       - name : upload apk
         uses: actions/upload-artifact@master
         if: always()
         with:
           name: app-release.apk
           path: ${{ github.workspace }}/app/build/outputs/apk/release
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: ${{ github.workspace }}/app/build/outputs/apk/release/app-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
