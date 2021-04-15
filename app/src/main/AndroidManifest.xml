@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstKotlinApp">
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:theme="@style/Theme.FirstKotlinApp.NoActionBar"></activity>
-        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
