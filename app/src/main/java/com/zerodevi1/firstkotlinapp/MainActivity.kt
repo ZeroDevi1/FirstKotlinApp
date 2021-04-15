@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.WindowManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,7 +22,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        // 设置软键盘的模式,解决 ScrollView 的冲突
+        // SOFT_INPUT_ADJUST_PAN : 软键盘适应ScrollView
+        // SOFT_INPUT_STATE_HIDDEN : 软键盘在刚启动时不会弹出
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         // 在 ActionBar 上显示返回图标
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // 响应 "登录" 按钮的单击事件
