@@ -35,8 +35,27 @@ jobs:
           echo "开始进行release构建"
           chmod +x gradlew
           ./gradlew app:assembleRelease
-      - name: Release apk
-        uses: ncipollo/release-action@v1.5.0
-        with:
-          artifacts: ${{ github.workspace }}/app/build/outputs/apk/release/app-release.apk
-          token: ${{ secrets.GIT_RElEASE_TOKEN }}
+      - name: Create Release
+          id: create_release
+          uses: monkeyWie/create-release@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GIT_RElEASE_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: false
+            prerelease: false
+      - name: Upload Release Android
+          uses: actions/upload-release-asset@v1.0.1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+            asset_path: ${{ github.workspace }}/app/build/outputs/apk/release/app-release.apk
+            asset_name: app-release-${{ steps.create_release.outputs.tag }}.apk
+            asset_content_type: application/zip
+#      - name: Release apk
+#        uses: ncipollo/release-action@v1.5.0
+#        with:
+#          artifacts: ${{ github.workspace }}/app/build/outputs/apk/release/app-release.apk
+#          token: ${{ secrets.GIT_RElEASE_TOKEN }}
