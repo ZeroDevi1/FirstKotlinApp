@@ -1,19 +1,16 @@
 package com.zerodevi1.firstkotlinapp
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
+import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +37,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // 创建菜单
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // 从资源创建菜单,传入 menu 表示把创建出来的菜单放到 menu 中
+        menuInflater.inflate(R.menu.main, menu)
+        // 返回 ture 表示菜单显示,否则不显示
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             // 点击了ActionBar上的返回图标
@@ -53,6 +58,14 @@ class MainActivity : AppCompatActivity() {
             }
             // 处理过的条目必须返回true
             return true
+        } else if (item.itemId == R.id.action_settings) {
+            // 选了设置项菜单,显示一条提示信息
+            Snackbar.make(findViewById(R.id.fragment_container), "你选了设置", Snackbar.LENGTH_LONG)
+                .show()
+        } else if (item.itemId == R.id.action_subment_item) {
+            // 选了子菜单下的子菜单项,显示一条提示消息
+            Snackbar.make(findViewById(R.id.fragment_container), "你选了子菜单项", Snackbar.LENGTH_LONG)
+                .show()
         }
         return super.onOptionsItemSelected(item)
     }
