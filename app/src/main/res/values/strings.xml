@@ -12,4 +12,5 @@
     <string name="title_activity_test_fragment_fragment">TestFragmentActivityFragment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exit_or_not">您真的要退出吗?再考虑一下吧!</string>
 </resources>
