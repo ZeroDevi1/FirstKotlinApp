@@ -3,6 +3,7 @@ package com.zerodevi1.firstkotlinapp
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +37,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, loginFragment)
             .commit()
 
+//        // 开启定时器
+//        // 创建一个定时器
+//        var timer = Timer()
+//        // 创建一个TimerTask对象,要执行的代码就包在它里面
+//        val timerTask = object:TimerTask(){
+//            override fun run() {
+//                // 定时器中要执行的代码
+//                // 取得当前时间
+//                val date = Date()
+//                Log.i("timetest",date.toString())
+//            }
+//        }
+//        // 启用这个定时器
+//        timer.schedule(timerTask,1000,3000)
     }
 
     // 创建菜单
