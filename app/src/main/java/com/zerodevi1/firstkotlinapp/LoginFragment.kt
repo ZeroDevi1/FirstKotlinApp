@@ -1,17 +1,14 @@
 package com.zerodevi1.firstkotlinapp
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
-import android.content.Intent
-import android.icu.number.Scale
+import android.animation.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.*
+import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -72,7 +69,9 @@ class LoginFragment : Fragment() {
 //            imageViewHead.startAnimation(animation)
 //            testAnimationSet()
 //            testAnimator()
-            testAnimatorSet()
+//            testAnimatorSet()
+//            testAnimateResource()
+            testLayoutAnimate()
         }
 
         // 启动注册页面
@@ -172,5 +171,52 @@ class LoginFragment : Fragment() {
         val animator = AnimatorSet()
         animator.play(scaleAnimatorX).with(scaleAnimatorY).after(rotateAnimator)
         animator.start()
+    }
+
+    private fun testAnimateResource() {
+        // 利用 AnimatorInflater 从资源中加载动画
+        val set = AnimatorInflater.loadAnimator(context, R.animator.test_animate) as AnimatorSet
+        // 资源中并没有指定动画要应用到哪个控件上,所以在这里指定
+        set.setTarget(imageViewHead)
+        set.start()
+    }
+
+    /**
+     * 测试 Layout 动画
+     */
+    private fun testLayoutAnimate() {
+        // 创建一个新按钮
+        val btn = Button(context)
+        // 设置它显示的文本
+        btn.setText("我是被动态添加的")
+        // 创建一个排版参数对象
+        val layoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.MATCH_CONSTRAINT, // 横向由约束拉伸
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        // 把应用这个LayoutParams(排版参数)的控件放在注册按钮的下面
+        layoutParams.topToBottom = R.id.buttonRegister
+        // 左边与注册按钮对齐
+        layoutParams.leftToLeft = R.id.buttonRegister
+        // 右边也与注册按钮对齐
+        layoutParams.rightToRight = R.id.buttonRegister
+        // 设置外部空白,参数分别为 左 上 右 下 ,实际效果是设置顶部与相邻控件的间距
+        // 24个像素,这里的单位不是dp
+        layoutParams.setMargins(0, 24, 0, 0)
+        // 将这个排版参数应用到新建的按钮中
+        btn.layoutParams = layoutParams
+
+        val transition = LayoutTransition()
+        // 当一个控件出现时,希望它是大小有变化的动画
+        // 利用 AnimatorInflater 从资源中加载动画
+        val set = AnimatorInflater.loadAnimator(context, R.animator.test_animate) as AnimatorSet
+        // 设置控件出现时的动画
+        transition.setAnimator(LayoutTransition.APPEARING, set)
+        // 设置一个控件出现时,其他控件位置改变动画的持续时间
+        transition.setDuration(LayoutTransition.CHANGE_APPEARING, 4000)
+        // 将包含动画的 LayoutTransition 对象设置到 ViewGroup 控件中
+        layout.layoutTransition = transition
+        // 将按钮添加到 RelativeLayout 中
+        layout.addView(btn)
     }
 }
