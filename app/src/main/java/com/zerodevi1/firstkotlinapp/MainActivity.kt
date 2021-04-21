@@ -34,7 +34,13 @@ class MainActivity : AppCompatActivity() {
 
         // 将LoginFragment加入到Activity
         // 获取 Fragment 事务
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, loginFragment)
+        supportFragmentManager.beginTransaction()
+            // 设置 Fragment 间的转场动画
+            .setCustomAnimations(
+                R.anim.in_anim1,
+                R.anim.out_anim1,
+            )
+            .add(R.id.fragment_container, loginFragment)
             .commit()
 
 //        // 开启定时器

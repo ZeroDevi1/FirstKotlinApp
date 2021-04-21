@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--位移动画-->
+<!--
+    fromXDelta : 横向上从 0 位置开始移动
+    toXDelta="100%p" : 移动 100% 宽度的距离,即向右移动
+-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:fromXDelta="0"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:toXDelta="100%p">
+
+
+</translate>

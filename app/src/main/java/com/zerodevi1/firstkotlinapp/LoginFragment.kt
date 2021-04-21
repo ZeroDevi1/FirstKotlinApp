@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.*
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -82,8 +83,19 @@ class LoginFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             // addToBackStack() 把这次操作放到后退栈,这样用户点击返回键就会执行反向操作,也可以使用 FragmentManager 执行反向操作
             // 参数是这次操作的名称,用于查找某个操作
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-                .addToBackStack("login").commit()
+            fragmentManager.beginTransaction()
+                // 设置动画必须在操作前
+                .setCustomAnimations(
+                    R.anim.in_anim1,
+                    R.anim.out_anim1,
+                    R.anim.in_anim2,
+                    R.anim.out_anim2
+                )
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack("login")
+                // 为 Fragment 切换增加动画,进入和退出是相反的动画
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit()
         }
     }
 
