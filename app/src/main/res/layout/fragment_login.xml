@@ -13,18 +13,19 @@
         android:layout_gravity="center_vertical"
         android:animateLayoutChanges="true">
 
-        <ImageView
+        <com.zerodevi1.firstkotlinapp.RoundImageView
             android:id="@+id/imageViewHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#2196F3"
-            android:src="@drawable/icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:borderColor="#2196F3"
+            app:borderWidth="2dp"
+            app:drawable="@drawable/icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.427"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editTextName"
