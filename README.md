@@ -22,4 +22,8 @@
 - 动画资源
 - Layout动画
 - 转场动画
+
+## 四.RecyclerView
+- 自定义子项布局
+- 局部数据刷新
 ## 附录: 集成 Github Action

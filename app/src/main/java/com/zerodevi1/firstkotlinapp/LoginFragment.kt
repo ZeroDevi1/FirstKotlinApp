@@ -28,51 +28,10 @@ class LoginFragment : Fragment() {
 
         // 响应 "登录" 按钮的单击事件
         this.buttonLogin.setOnClickListener {
-            // 这里编写响应事件的代码
-            val snackbar = Snackbar.make(it, "你点我干啥?", Snackbar.LENGTH_LONG)
-            // 显示提示
-            snackbar.show()
-            // 测试动画效果
-            // 创建一个旋转动画(动哪里?动角度)
-//            val animation = RotateAnimation(0.0f, 360f)
-//            val animation = RotateAnimation(
-//                0.0f,
-//                180f,
-//                Animation.RELATIVE_TO_SELF, // pivotXValue 的类型 : Animation.RELATIVE_TO_SELF 这个轴心X坐标是相对于图像自己
-//                0.5f,   // 旋转轴心在 X坐标 上的位置 0-最左边 1-最右边 0.5-中心
-//                Animation.RELATIVE_TO_SELF, //
-//                0.5f
-//            )
-            // 沿同一方向旋转
-//            val animation = RotateAnimation(
-//                0.0f,
-//                360f,
-//                Animation.RELATIVE_TO_SELF, // pivotXValue 的类型 : Animation.RELATIVE_TO_SELF 这个轴心X坐标是相对于图像自己
-//                0.5f,   // 旋转轴心在 X坐标 上的位置 0-最左边 1-最右边 0.5-中心
-//                Animation.RELATIVE_TO_SELF, //
-//                0.5f
-//            )
-            // 移动位置的动画
-//            val animation = TranslateAnimation(0F, 100F, 0F, 0F)
-            // 缩放的动画
-//            val animation = ScaleAnimation(1f,1.5f,1f,1.5f,0.5f,0.5f)
-            // 改变透明度的动画
-//            val animation = AlphaAnimation(0.5f, 1f)
-//            // 设置重复模式,REVERSE的意思是动完一次后接着反向动(如何重复)
-//            animation.repeatMode = Animation.REVERSE
-//            // 旋转速度设置为匀速 : LinearInterpolator 线性插值
-//            animation.interpolator = LinearInterpolator()
-//            // 设置持续时间,1000毫秒(动多长时间)
-//            animation.duration = 1000
-//            // 设置重复次数
-//            animation.repeatCount = 10
-//            // 启动动画(动谁?动imageView)
-//            imageViewHead.startAnimation(animation)
-//            testAnimationSet()
-//            testAnimator()
-//            testAnimatorSet()
-//            testAnimateResource()
-            testLayoutAnimate()
+            // 启动 MusicListFragment
+            val fragment = MusicListFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack("login").commit()
         }
 
         // 启动注册页面
