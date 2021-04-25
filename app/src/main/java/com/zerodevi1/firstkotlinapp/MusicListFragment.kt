@@ -9,16 +9,18 @@ import kotlinx.android.synthetic.main.fragment_music_list.*
 
 class MusicListFragment : Fragment() {
 
-    private val data = ArrayList<MusicInfo>()
+    private val data = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        data.add(MusicInfo("徐良","今天见了前女友",2))
-        data.add(MusicInfo("汪苏泷","后会无期",5))
-        data.add(MusicInfo("周杰伦","我不配",4))
-        data.add(MusicInfo("杨祖帅","灰色节拍",3))
-        data.add(MusicInfo("许嵩","明智之举",4))
-        data.add(MusicInfo("星弟","辞别",3))
+        data.add(MusicInfo("徐良", "今天见了前女友", 2))
+        data.add(MusicInfo("汪苏泷", "后会无期", 5))
+        data.add(MusicInfo("周杰伦", "我不配", 4))
+        // 插入一条广告
+        data.add(Advertising("蓝翔", content = "中国航天人才的摇篮指定生产厂家"))
+        data.add(MusicInfo("杨祖帅", "灰色节拍", 3))
+        data.add(MusicInfo("许嵩", "明智之举", 4))
+        data.add(MusicInfo("星弟", "辞别", 3))
         // 不调用这一句,Fragment的菜单显示不出来
         setHasOptionsMenu(true)
     }
@@ -41,21 +43,21 @@ class MusicListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         // 从资源中创建菜单
-        inflater.inflate(R.menu.music_list_menu,menu)
+        inflater.inflate(R.menu.music_list_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // 响应本Fragment中的菜单项的选择
         item.let {
-            if(item.itemId == R.id.add_one_music_info){
+            if (item.itemId == R.id.add_one_music_info) {
                 // 向列表中添加一项
-                val musicInfo = MusicInfo("徐良","指环",5)
+                val musicInfo = MusicInfo("徐良", "指环", 5)
                 data.add(musicInfo)
                 // 利用 Adapter 通知 RecyclerView,刷新刚刚插入的一条数据数据
 //                musicListView.adapter?.notifyDataSetChanged()
-                musicListView.adapter?.notifyItemInserted(data.size-1)
+                musicListView.adapter?.notifyItemInserted(data.size - 1)
                 // 将 RecyclerView 定位到最后一行
-                musicListView.scrollToPosition(data.size-1)
+                musicListView.scrollToPosition(data.size - 1)
                 // 返回 true 表示此菜单被响应
                 return true
             }
