@@ -116,11 +116,11 @@ class MainActivity : AppCompatActivity() {
             builder.setMessage(R.string.exit_or_not)
                 // 设置对话框中的正按钮以及按钮的响应方法,相当于OK,YES之类的按钮
                 .setPositiveButton(
-                    android.R.string.ok,
-                    DialogInterface.OnClickListener { dialog, which ->
-                        // 退出当前 Activity
-                        requireActivity().finish()
-                    })
+                    android.R.string.ok
+                ) { _, _ ->
+                    // 退出当前 Activity
+                    requireActivity().finish()
+                }
                 // 设置对话框中的负按钮以及按钮的响应方法,相当于No,Cancel之类的按钮
                 .setNegativeButton(
                     android.R.string.cancel,
